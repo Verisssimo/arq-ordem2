@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>:)</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: white;
+    font-family: 'Times New Roman', serif;
+    font-size: 152px;
+    color: black;
+  }
+  #message {
+    font-size: 22px;
+    justify-content: center;
+    font-family: 'Times New Roman', serif;
+    color: black;
+    margin-top: 10px;
+  }
+  
+</style>
+</head>
+<body>
+<div id="countdown"></div>
+<div id="message">Aquele que não é preso pelo tempo. Que é moldavel, eterno.</div>
+<script>
+  function updateCountdown() {
+    const targetDate = new Date("2023-08-13T18:30:00");
+    const currentDate = new Date();
+    const remainingTime = targetDate - currentDate;
+
+    if (remainingTime <= 0) {
+      document.getElementById("countdown").innerHTML = "Obrigado por esperar!";
+    } else {
+      const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+      const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      setTimeout(updateCountdown, 1000);
+    }
+  }
+
+  updateCountdown();
+</script>
+</body>
+
+<!-- o conhecimento é absoluto. assim como aquele que o tem. -->
+<!-- 1397 é um deles -->
+  
+</html>
