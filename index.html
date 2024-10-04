@@ -7,35 +7,29 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #282c34;
-            color: #ffffff;
+            background-color: #000;
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-        }
-
-        .container {
             text-align: center;
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 3em;
             margin-bottom: 20px;
         }
 
         #countdown {
             display: flex;
             justify-content: center;
+            font-size: 2.5em;
         }
 
         .time {
-            margin: 0 10px;
-            font-size: 2em;
-            padding: 20px;
-            border: 2px solid #ffffff;
-            border-radius: 10px;
+            margin: 0 15px;
         }
 
         #message {
@@ -45,13 +39,13 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div>
         <h1>Contador Regresivo</h1>
         <div id="countdown">
-            <div class="time" id="days"></div>
-            <div class="time" id="hours"></div>
-            <div class="time" id="minutes"></div>
-            <div class="time" id="seconds"></div>
+            <div class="time" id="days">0d</div>
+            <div class="time" id="hours">0h</div>
+            <div class="time" id="minutes">0m</div>
+            <div class="time" id="seconds">0s</div>
         </div>
         <p id="message"></p>
     </div>
@@ -60,24 +54,25 @@
         const countdownDate = new Date("2024-10-04T03:33:00").getTime();
 
         const updateCountdown = () => {
-            const now = new Date().getTime();
+            const now = Date.now();
             const distance = countdownDate - now;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("message").textContent = "O evento começou!";
+                return;
+            }
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("days").innerHTML = `${days}d`;
-            document.getElementById("hours").innerHTML = `${hours}h`;
-            document.getElementById("minutes").innerHTML = `${minutes}m`;
-            document.getElementById("seconds").innerHTML = `${seconds}s`;
-
-            if (distance < 0) {
-                clearInterval(interval);
-                document.getElementById("countdown").style.display = "none";
-                document.getElementById("message").innerHTML = "O evento começou!";
-            }
+            document.getElementById("days").textContent = `${days}d`;
+            document.getElementById("hours").textContent = `${hours}h`;
+            document.getElementById("minutes").textContent = `${minutes}m`;
+            document.getElementById("seconds").textContent = `${seconds}s`;
         };
 
         const interval = setInterval(updateCountdown, 1000);
