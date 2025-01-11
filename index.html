@@ -1,82 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>help</title>
+    <title>Banco de Dados - Ordem Paranormal</title>
     <style>
         body {
-            font-family: Times New Roman, sans-serif;
-            background-color: #000000;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
+            background-color: #0a0a0a;
+            color: #00FF00;
+            font-family: "Courier New", monospace;
+            padding: 20px;
         }
-
         h1 {
-            font-size: 3em;
+            text-align: center;
+            font-size: 2.5em;
             margin-bottom: 20px;
         }
-
-        #countdown {
-            display: flex;
-            justify-content: center;
-            font-size: 2.5em;
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
         }
-
-        .time {
-            margin: 0 15px;
+        .search-input {
+            padding: 10px;
+            font-size: 1.2em;
+            border: 2px solid #00FF00;
+            background-color: #1a1a1a;
+            color: #00FF00;
+            width: 300px;
         }
-        
-        #message {
-            margin-top: 20px;
-            font-size: 1.5em;
+        .search-button {
+            padding: 10px;
+            font-size: 1.2em;
+            background-color: #00FF00;
+            border: none;
+            color: #0a0a0a;
+            cursor: pointer;
+        }
+        .search-button:hover {
+            background-color: #00CC00;
+        }
+        .description {
+            font-size: 1.1em;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
-    <div>
-        <h1>Logo, uma nova campanha de CONSPIRA RPG.</h1>
-        <h2>Obrigado por jogar!</h2>
-        <div id="countdown">
-            <div class="time" id="days">0d</div>
-            <div class="time" id="hours">0h</div>
-            <div class="time" id="minutes">0m</div>
-            <div class="time" id="seconds">0s</div>
-        </div>
-        <p id="message"></p>
+    <h1>Banco de Dados - Ordem Paranormal</h1>
+    <div class="description">
+        <p>Bem-vindo ao Banco de Dados da Ordem Paranormal. Este sistema foi desenvolvido para armazenar e organizar informações sobre agentes, colaboradores, e ocorrências relacionadas ao paranormal. Os dados são constantemente atualizados e contêm informações confidenciais de extrema importância para a segurança e vigilância da ordem. O acesso a certas informações pode ser restrito de acordo com a classificação de segurança.</p>
+        <p>Você pode buscar por registros de pessoas, ocorrências, artefatos e outros dados que possam ser de interesse para sua missão. Utilize a barra de pesquisa abaixo para acessar informações específicas.</p>
     </div>
-    
+
+    <div class="search-container">
+        <input type="text" id="searchQuery" class="search-input" placeholder="Digite o nome ou código de busca..." />
+        <button class="search-button" onclick="search()">Buscar</button>
+    </div>
+
+    <div class="footer">
+        <p>Ordem Paranormal - Todos os direitos reservados. Acesso restrito.</p>
+    </div>
+
     <script>
-        const countdownDate = new Date("2025-02-02T18:00:00").getTime();
-
-        const updateCountdown = () => {
-            const now = Date.now();
-            const distance = countdownDate - now;
-
-            if (distance < 0) {
-                clearInterval(interval);
-                document.getElementById("countdown").style.display = "none";
-                document.getElementById("message").textContent = "3th is 13";
-                return;
+        function search() {
+            let query = document.getElementById("searchQuery").value.toLowerCase();
+            if (query.includes("patrick")) {
+                window.location.href = "pagina2.html";
+            } else {
+                window.location.href = "pagina3.html";
             }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").textContent = `${days}d`;
-            document.getElementById("hours").textContent = `${hours}h`;
-            document.getElementById("minutes").textContent = `${minutes}m`;
-            document.getElementById("seconds").textContent = `${seconds}s`;
-        };
-
-        const interval = setInterval(updateCountdown, 1000);
+        }
     </script>
 </body>
 </html>
